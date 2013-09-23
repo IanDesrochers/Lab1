@@ -1,0 +1,18 @@
+SP+16		K0
+SP+12		K1
+SP+8		K2
+SP+4		K3
+SP+0		Delta
+
+R0		D0
+R1		D1
+R2		
+R3		
+R4		Loop Counter
+R5		T1
+R6		T2
+R7		T3
+R8		T4
+
+R10		Sum
+R11		
