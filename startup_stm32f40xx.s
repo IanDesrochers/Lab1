@@ -174,14 +174,42 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
                 AREA    |.text|, CODE, READONLY
 
 ; Reset handler
-Reset_Handler    PROC
-                 EXPORT  Reset_Handler             [WEAK]
+Reset_Handler   PROC
+				EXPORT  Reset_Handler              [WEAK]
 
-        IMPORT  example1
+				IMPORT  ASM_TEA_ENCRYPT
+				IMPORT	ASM_TEA_DECRYPT
+				
+				LDR		R0,		=0x20010000			;&KEY
+				ADD		R1,		R0,		#16			;&DATA
+				
+				LDR		R5,		=0x0000000A			;Test KEY value
+				LDR		R6,		=0x0000000B
+				LDR		R7,		=0x0000000C
+				LDR		R8,		=0x0000000D
+				
+				LDR		R10,	=0x00001324			;Test DATA value
+				LDR		R11,	=0x00001010
+				
+				STM		R0,		{R5-R8}				;Store KEY in &KEY
+				STM		R1,		{R10-R11}			;Store DATA in &DATA
 
-                 LDR     R0, =example1
-                 BX      R0
-                 ENDP
+                LDR     R3,		=ASM_TEA_ENCRYPT	;Load address of encrypt procedure
+                BLX		R3							;Branch to Encrypt
+				
+				MOV		R10,	R0					;Move encrypted DATA so as to
+				MOV		R11,	R1					; not overwrite it
+				
+				LDR		R0,		=0x20010000			;&KEY
+				ADD		R1,		R0,		#16			;&DATA
+				
+				STM		R0,		{R5-R8}				;Store KEY in &KEY
+				STM		R1,		{R10-R11}			;Store DATA in &DATA
+				
+				LDR		R3,		=ASM_TEA_DECRYPT	;Load address of decrypt procedure
+				BLX		R3							;Branch to Decrypt
+				
+				ENDP
 
 ; Dummy Exception Handlers (infinite loops which can be modified)
 

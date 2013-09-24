@@ -1,3 +1,3 @@
 Dependencies for Project 'Lab1', Target 'Lab1': (DO NOT MODIFY !)
-F (.\startup_stm32f40xx.s)(0x523B05E0)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\startup_stm32f40xx.lst --xref -o .\objects\startup_stm32f40xx.o --depend .\objects\startup_stm32f40xx.d)
-F (.\AssemblyProj1.s)(0x523B0790)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\assemblyproj1.lst --xref -o .\objects\assemblyproj1.o --depend .\objects\assemblyproj1.d)
+F (.\startup_stm32f40xx.s)(0x5241C026)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\startup_stm32f40xx.lst --xref -o .\objects\startup_stm32f40xx.o --depend .\objects\startup_stm32f40xx.d)
+F (.\ASM_TEA.s)(0x5241C076)()
