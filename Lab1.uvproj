@@ -403,9 +403,19 @@
           <GroupName>Main</GroupName>
           <Files>
             <File>
-              <FileName>AssemblyProj1.s</FileName>
+              <FileName>ASM_TEA.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\AssemblyProj1.s</FilePath>
+              <FilePath>.\ASM_TEA.s</FilePath>
+            </File>
+            <File>
+              <FileName>C_TEA.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C_TEA.c</FilePath>
+            </File>
+            <File>
+              <FileName>C_WRAPPER.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\C_WRAPPER.c</FilePath>
             </File>
           </Files>
         </Group>

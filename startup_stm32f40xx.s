@@ -176,20 +176,23 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 ; Reset handler
 Reset_Handler   PROC
 				EXPORT  Reset_Handler              [WEAK]
-
+				
 				IMPORT  ASM_TEA_ENCRYPT
 				IMPORT	ASM_TEA_DECRYPT
+				
+				IMPORT main
+				BL main
 				
 				LDR		R0,		=0x20010000			;&KEY
 				ADD		R1,		R0,		#16			;&DATA
 				
-				LDR		R5,		=0x0000000A			;Test KEY value
-				LDR		R6,		=0x0000000B
-				LDR		R7,		=0x0000000C
-				LDR		R8,		=0x0000000D
+				LDR		R5,		=0x00000000			;Test KEY value
+				LDR		R6,		=0x00000001
+				LDR		R7,		=0x00000002
+				LDR		R8,		=0x00000003
 				
-				LDR		R10,	=0x00001324			;Test DATA value
-				LDR		R11,	=0x00001010
+				LDR		R10,	=0x00726c64			;Test DATA value
+				LDR		R11,	=0x00000000
 				
 				STM		R0,		{R5-R8}				;Store KEY in &KEY
 				STM		R1,		{R10-R11}			;Store DATA in &DATA
