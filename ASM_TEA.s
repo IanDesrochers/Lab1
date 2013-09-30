@@ -23,8 +23,8 @@
 
 	AREA ASM_TEA, CODE, READONLY
 			
-			EXPORT ASM_TEA_ENCRYPT
-			EXPORT ASM_TEA_DECRYPT
+			EXPORT ASM_TEA_ENCRYPT_STRING
+			EXPORT ASM_TEA_DECRYPT_STRING
 			
 ASM_TEA_ENCRYPT	PUSH {R4-R12}				;Save previous register states
 				
@@ -69,6 +69,7 @@ ENCRYPTLOOP		ADD R10, R10, R11			;Increment SUM by DELTA
 				SUB R4, R4, #1				;Check if we're done all iterations
 				CMP R4, #0
 				BNE ENCRYPTLOOP
+				
 				
 				POP {R4-R12}				;Restore previous register values
 				BX LR
@@ -123,4 +124,51 @@ DECRYPTLOOP
 				BX LR
 				ALIGN
 				
+				
+ASM_TEA_ENCRYPT_STRING	PUSH {R4-R12,R14}
+				LDR R4, =0 ;Counter in R4
+				MOV R5, R0
+				MOV R6, R1
+				MOV R7, R2
+				LDR R8, =0x20001000
+				
+ENCRYPT_ITERATE	MOV R0, R5
+				ADD R1, R6, R4
+				
+				BL ASM_TEA_ENCRYPT
+				ADD R3, R4, R8
+				STM R3, {R0-R1}
+				
+				ADD R4, R4, #0x00000008
+				CMP R4, R7
+				BLT ENCRYPT_ITERATE
+				MOV R0, R8
+				POP {R4-R12,R14}
+				BX LR
+				
+
+ASM_TEA_DECRYPT_STRING PUSH {R4-R12,R14}
+				LDR R4, =0 ;Counter in R4
+				MOV R5, R0
+				MOV R6, R1
+				MOV R7, R2
+				LDR R8, =0x20001000
+				
+DECRYPT_ITERATE	MOV R0, R5
+				ADD R1, R6, R4
+				
+				BL ASM_TEA_DECRYPT
+				ADD R3, R4, R8
+				STM R3, {R0-R1}
+				
+				ADD R4, R4, #0x00000008
+				CMP R7, R4
+				BNE DECRYPT_ITERATE
+				
+				MOV R0, R8
+				POP {R4-R12,R14}
+				BX LR
+				ALIGN
+				
+	
 	END
