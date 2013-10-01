@@ -417,6 +417,11 @@
               <FileType>1</FileType>
               <FilePath>.\C_WRAPPER.c</FilePath>
             </File>
+            <File>
+              <FileName>EncrypteMessages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\EncrypteMessages.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

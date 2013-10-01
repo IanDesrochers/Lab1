@@ -201,7 +201,7 @@ ARM Macro Assembler    Page 4
 
   153 00000116 460E            MOV              R6, R1
   154 00000118 4617            MOV              R7, R2
-  155 0000011A F8DF 802C       LDR              R8, =0x20001000
+  155 0000011A F04F 2820       LDR              R8, =0x20002000
   156 0000011E         
   157 0000011E 4628    DECRYPT_ITERATE
                                MOV              R0, R5

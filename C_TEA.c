@@ -24,7 +24,7 @@ void c_tea_decrypt(unsigned int *key, unsigned int *data) {																		//T
 char *c_tea_encrypt_string(unsigned int *key, char *data, unsigned int length) {			//Manages what data is sent to be encrypted
 	unsigned int i;																																							// and compiles encrypted output
 	char *result_start = (char *)0x20001000;
-	unsigned int rounded_length = 8 * (length / 8) + 8;
+	unsigned int rounded_length = 8 * ((length-1) / 8) + 8;
 	for (i=1; i<=rounded_length; i++) {
 		memcpy(result_start+i-1, &data[i-1], 1);
 		if (i % 8 == 0) {
