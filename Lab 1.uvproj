@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Lab1</TargetName>
+      <TargetName>Lab 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -43,8 +43,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>Lab1</OutputName>
+          <OutputDirectory>.\</OutputDirectory>
+          <OutputName>Lab 1</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -139,7 +139,7 @@
             <RestoreTracepoints>1</RestoreTracepoints>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>0</TargetSelection>
+          <TargetSelection>1</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -162,12 +162,12 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <Capability>0</Capability>
+            <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
         </Utilities>
         <TargetArmAds>
@@ -400,13 +400,8 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Main</GroupName>
+          <GroupName>1a</GroupName>
           <Files>
-            <File>
-              <FileName>ASM_TEA.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\ASM_TEA.s</FilePath>
-            </File>
             <File>
               <FileName>C_TEA.c</FileName>
               <FileType>1</FileType>
@@ -418,17 +413,21 @@
               <FilePath>.\C_WRAPPER.c</FilePath>
             </File>
             <File>
-              <FileName>EncrypteMessages.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\EncrypteMessages.h</FilePath>
+              <FileName>ASM_TEA.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\ASM_TEA.s</FilePath>
+            </File>
+            <File>
+              <FileName>ASM_WRAPPER.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\ASM_WRAPPER.s</FilePath>
+            </File>
+            <File>
+              <FileName>DATA_SEGMENT.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\DATA_SEGMENT.s</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Drivers</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Library1</GroupName>
         </Group>
       </Groups>
     </Target>

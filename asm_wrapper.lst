@@ -1,0 +1,310 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;Main assembly program
+    2 00000000         
+    3 00000000                 AREA             ASM_WRAPPER, CODE, READONLY
+    4 00000000         
+    5 00000000                 EXPORT           ASM_MAIN
+    6 00000000         
+    7 00000000                 IMPORT           teaData
+    8 00000000                 IMPORT           teaKey
+    9 00000000                 IMPORT           ASM_TEA_ENCRYPT
+   10 00000000                 IMPORT           ASM_TEA_DECRYPT
+   11 00000000                 IMPORT           ASM_TEA_ENCRYPT_STRING
+   12 00000000                 IMPORT           ASM_TEA_DECRYPT_STRING
+   13 00000000         
+   14 00000000         ;
+   15 00000000         ; MAIN ASSEMBLY ENTRY POINT
+   16 00000000         ;
+   17 00000000         ; REGISTER MAP
+   18 00000000         ; R0  
+   19 00000000         ; R1  
+   20 00000000         ; R2  SCRATCH
+   21 00000000         ; R3  SCRATCH
+   22 00000000         ; R4  
+   23 00000000         ; R5  
+   24 00000000         ; R6  
+   25 00000000         ; R7  
+   26 00000000         ; R8  &DATA
+   27 00000000         ; R9  &teaString
+   28 00000000         ; R10  LENGTH
+   29 00000000         ; R11  
+   30 00000000         ; R12  
+   31 00000000         
+   32 00000000 53 70 61 
+              63 65 3A 
+              20 74 68 
+              65 20 66 
+              69 6E 61 
+              6C 20 66 
+              72 6F 6E 
+              74 69 65 
+              72 2E 20 
+              54 68 65 
+              73 65 20 
+              61 72 65 
+              20 74 68 
+              65 20 76 
+              6F 79 61 
+              67 65 73 
+              20 6F 66 
+              20 74 68 
+              65 20 73 
+              74 61 72 
+              73 68 69 
+              70 20 45 
+              6E 74 65 
+              72 70 72 
+              69 73 65 
+              2E 20 49 
+              74 73 20 
+              63 6F 6E 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+              74 69 6E 
+              75 69 6E 
+              67 20 6D 
+              69 73 73 
+              69 6F 6E 
+              20 74 6F 
+              20 65 78 
+              70 6C 6F 
+              72 65 20 
+              73 74 72 
+              61 6E 67 
+              65 20 6E 
+              65 77 20 
+              77 6F 72 
+              6C 64 73 
+              2C 20 74 
+              6F 20 73 
+              65 65 6B 
+              20 6F 75 
+              74 20 6E 
+              65 77 20 
+              6C 69 66 
+              65 20 61 
+              6E 64 20 
+              6E 65 77 
+              20 63 69 
+              76 69 6C 
+              69 7A 61 
+              74 69 6F 
+              6E 73 2C 
+              20 74 6F 
+              20 62 6F 
+              6C 64 6C 
+              79 20 67 
+              6F 20 77 
+              68 65 72 
+              65 20 6E 
+              6F 20 6F 
+              6E 65 20 
+              68 61 73 
+              20 67 6F 
+              6E 65 20 
+              62 65 66 
+              6F 72 65 
+              2E 00    teaString
+                               DCB              "Space: the final frontier. The
+se are the voyages of the starship Enterprise. Its continuing mission to explor
+e strange new worlds, to seek out new life and new civilizations, to boldly go 
+where no one has gone before.", 0
+   33 000000DA         
+   34 000000DA E92D 5FF0 
+                       ASM_MAIN
+                               PUSH             {R4-R12, LR} ;Store previous re
+                                                            gister states
+   35 000000DE         
+   36 000000DE 4815            LDR              R0, =teaKey ;Load &KEY into par
+                                                            ameter register
+   37 000000E0         
+   38 000000E0 4C15            LDR              R4, =0x45C5C07A ;Generate KEY
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   39 000000E2 4D16            LDR              R5, =0x40097CCE
+   40 000000E4 F04F 0666       LDR              R6, =0x66
+   41 000000E8 F04F 0768       LDR              R7, =0x68
+   42 000000EC         
+   43 000000EC E880 00F0       STM              R0, {R4-R7} ;Store KEY into mem
+                                                            ory (teaKey)
+   44 000000F0         
+   45 000000F0 F8DF 804C       LDR              R8, =teaData ;Initialize string
+                                                             destination locati
+                                                            on
+   46 000000F4 F8DF 904C       LDR              R9, =teaString ;Initialize stri
+                                                            ng source location
+   47 000000F8 F04F 0200       MOV              R2, #0      ;Initialize string-
+                                                            copy counter
+   48 000000FC F04F 0A08       MOV              R10, #8
+   49 00000100         
+   50 00000100 F919 3B01 
+                       stringCopyLoop
+                               LDRSB            R3, [R9], #1 ;Copy teaString to
+                                                             teaKey
+   51 00000104 F848 3B01       STR              R3, [R8], #1
+   52 00000108 F102 0201       ADD              R2, R2, #1
+   53 0000010C 2A08            CMP              R2, #8
+   54 0000010E BF04 2200       MOVEQ            R2, #0
+   55 00000112 F10A 0A08       ADDEQ            R10, #8     ;Store LENGTH (roun
+                                                            ded up to nearest 8
+                                                             bytes)
+   56 00000116 2B00            CMP              R3, #0
+   57 00000118 D1F2            BNE              stringCopyLoop
+   58 0000011A         
+   59 0000011A 4806    donePadding
+                               LDR              R0, =teaKey ;Set Encrypt parame
+                                                            ter registers
+   60 0000011C 4908            LDR              R1, =teaData
+   61 0000011E 4652            MOV              R2, R10
+   62 00000120         
+   63 00000120 F7FF FFFE       BL               ASM_TEA_ENCRYPT_STRING 
+                                                            ;Encrypt string
+   64 00000124         
+   65 00000124 4601            MOV              R1, R0      ;Set Decrypt parame
+                                                            ter registers
+   66 00000126 4803            LDR              R0, =teaKey
+   67 00000128 4652            MOV              R2, R10
+   68 0000012A         
+   69 0000012A F7FF FFFE       BL               ASM_TEA_DECRYPT_STRING 
+                                                            ;Decrypt string
+   70 0000012E         
+   71 0000012E E8BD 5FF0       POP              {R4-R12, LR} ;Restore previous 
+                                                            register states
+   72 00000132 4770            BX               LR          ;Return
+   73 00000134                 ALIGN
+   74 00000134         
+   75 00000134                 END
+              00000000 
+              45C5C07A 
+              40097CCE 
+              00000000 
+              00000000 
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\asm
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+_wrapper.d -o.\asm_wrapper.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include
+ -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --list=.\asm_wrappe
+r.lst ASM_WRAPPER.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+ASM_MAIN 000000DA
+
+Symbol: ASM_MAIN
+   Definitions
+      At line 34 in file ASM_WRAPPER.s
+   Uses
+      At line 5 in file ASM_WRAPPER.s
+Comment: ASM_MAIN used once
+ASM_WRAPPER 00000000
+
+Symbol: ASM_WRAPPER
+   Definitions
+      At line 3 in file ASM_WRAPPER.s
+   Uses
+      None
+Comment: ASM_WRAPPER unused
+donePadding 0000011A
+
+Symbol: donePadding
+   Definitions
+      At line 59 in file ASM_WRAPPER.s
+   Uses
+      None
+Comment: donePadding unused
+stringCopyLoop 00000100
+
+Symbol: stringCopyLoop
+   Definitions
+      At line 50 in file ASM_WRAPPER.s
+   Uses
+      At line 57 in file ASM_WRAPPER.s
+Comment: stringCopyLoop used once
+teaString 00000000
+
+Symbol: teaString
+   Definitions
+      At line 32 in file ASM_WRAPPER.s
+   Uses
+      At line 46 in file ASM_WRAPPER.s
+Comment: teaString used once
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+ASM_TEA_DECRYPT 00000000
+
+Symbol: ASM_TEA_DECRYPT
+   Definitions
+      At line 10 in file ASM_WRAPPER.s
+   Uses
+      None
+Comment: ASM_TEA_DECRYPT unused
+ASM_TEA_DECRYPT_STRING 00000000
+
+Symbol: ASM_TEA_DECRYPT_STRING
+   Definitions
+      At line 12 in file ASM_WRAPPER.s
+   Uses
+      At line 69 in file ASM_WRAPPER.s
+Comment: ASM_TEA_DECRYPT_STRING used once
+ASM_TEA_ENCRYPT 00000000
+
+Symbol: ASM_TEA_ENCRYPT
+   Definitions
+      At line 9 in file ASM_WRAPPER.s
+   Uses
+      None
+Comment: ASM_TEA_ENCRYPT unused
+ASM_TEA_ENCRYPT_STRING 00000000
+
+Symbol: ASM_TEA_ENCRYPT_STRING
+   Definitions
+      At line 11 in file ASM_WRAPPER.s
+   Uses
+      At line 63 in file ASM_WRAPPER.s
+Comment: ASM_TEA_ENCRYPT_STRING used once
+teaData 00000000
+
+Symbol: teaData
+   Definitions
+      At line 7 in file ASM_WRAPPER.s
+   Uses
+      At line 45 in file ASM_WRAPPER.s
+      At line 60 in file ASM_WRAPPER.s
+
+teaKey 00000000
+
+Symbol: teaKey
+   Definitions
+      At line 8 in file ASM_WRAPPER.s
+   Uses
+      At line 36 in file ASM_WRAPPER.s
+      At line 59 in file ASM_WRAPPER.s
+      At line 66 in file ASM_WRAPPER.s
+
+6 symbols
+345 symbols in table

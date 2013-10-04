@@ -1,10 +1,0 @@
-Dependencies for Project 'Lab1', Target 'Lab1': (DO NOT MODIFY !)
-F (.\startup_stm32f40xx.s)(0x524A0312)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\startup_stm32f40xx.lst --xref -o .\objects\startup_stm32f40xx.o --depend .\objects\startup_stm32f40xx.d)
-F (.\ASM_TEA.s)(0x524A0FBA)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\asm_tea.lst --xref -o .\objects\asm_tea.o --depend .\objects\asm_tea.d)
-F (.\C_TEA.c)(0x524A02BF)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DSTM32F40XX-o .\objects\c_tea.o --omf_browse .\objects\c_tea.crf --depend .\objects\c_tea.d)
-I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C86004)
-I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C86004)
-F (.\C_WRAPPER.c)(0x524A0DE4)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DSTM32F40XX-o .\objects\c_wrapper.o --omf_browse .\objects\c_wrapper.crf --depend .\objects\c_wrapper.d)
-I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C86004)
-I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C86004)
-F (.\EncrypteMessages.h)(0x523C321C)()

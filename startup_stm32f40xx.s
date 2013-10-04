@@ -174,48 +174,14 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
                 AREA    |.text|, CODE, READONLY
 
 ; Reset handler
-Reset_Handler   PROC
-				EXPORT  Reset_Handler              [WEAK]
-				
-				;IMPORT  ASM_TEA_ENCRYPT_STRING
-				;IMPORT	ASM_TEA_DECRYPT_STRING
-				
-				IMPORT main
-				BL main
-				
-				
-				;LDR		R0,		=0x20010000			;&KEY
-				;ADD		R1,		R0,		#16			;&DATA
-				
-				;LDR		R5,		=0x00000000			;Test KEY value
-				;LDR		R6,		=0x00000001
-				;LDR		R7,		=0x00000002
-				;LDR		R8,		=0x00000003
-				
-				;LDR		R10,	=0x00726c64			;Test DATA value
-				;LDR		R11,	=0x00000000
-				
-				;STM		R0,		{R5-R8}				;Store KEY in &KEY
-				;STM		R1,		{R10-R11}			;Store DATA in &DATA
-				;MOV		R2,		#8
+Reset_Handler    PROC
+                 EXPORT  Reset_Handler             [WEAK]
+        IMPORT  ASM_MAIN
+        IMPORT  main
 
-                ;LDR     R3,		=ASM_TEA_ENCRYPT_STRING	;Load address of encrypt procedure
-                ;BLX		R3							;Branch to Encrypt
-				
-				;MOV		R2, 	#8
-				;MOV		R10,	R0					;Move encrypted DATA so as to
-				;MOV		R11,	R1					; not overwrite it
-				
-				;LDR		R0,		=0x20010000			;&KEY
-				;LDR		R1,		=0x20001000			;&DATA
-				
-				;STM		R0,		{R5-R8}				;Store KEY in &KEY
-				;STM		R1,		{R10-R11}			;Store DATA in &DATA
-				
-				;LDR		R3,		=ASM_TEA_DECRYPT_STRING	;Load address of decrypt procedure
-				;BLX		R3							;Branch to Decrypt
-				
-				ENDP
+                 LDR R0, =ASM_MAIN
+				 BLX R0
+                 ENDP
 
 ; Dummy Exception Handlers (infinite loops which can be modified)
 
@@ -446,7 +412,7 @@ FPU_IRQHandler
                 
                  ELSE
                 
-                 ;IMPORT  __use_two_region_memory
+                 IMPORT  __use_two_region_memory
                  EXPORT  __user_initial_stackheap
                  
 __user_initial_stackheap
