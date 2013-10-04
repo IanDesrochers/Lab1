@@ -124,83 +124,81 @@ where no one has gone before.", 0
                                PUSH             {R4-R12, LR} ;Store previous re
                                                             gister states
    35 000000DE         
-   36 000000DE 4815            LDR              R0, =teaKey ;Load &KEY into par
+   36 000000DE 4816            LDR              R0, =teaKey ;Load &KEY into par
                                                             ameter register
    37 000000E0         
-   38 000000E0 4C15            LDR              R4, =0x45C5C07A ;Generate KEY
+   38 000000E0 F04F 0402       LDR              R4, =0x2    ;Generate KEY
 
 
 
 ARM Macro Assembler    Page 3 
 
 
-   39 000000E2 4D16            LDR              R5, =0x40097CCE
-   40 000000E4 F04F 0666       LDR              R6, =0x66
-   41 000000E8 F04F 0768       LDR              R7, =0x68
-   42 000000EC         
-   43 000000EC E880 00F0       STM              R0, {R4-R7} ;Store KEY into mem
+   39 000000E4 F04F 0500       LDR              R5, =0x0
+   40 000000E8 F04F 0601       LDR              R6, =0x1
+   41 000000EC F04F 0703       LDR              R7, =0x3
+   42 000000F0         
+   43 000000F0 E880 00F0       STM              R0, {R4-R7} ;Store KEY into mem
                                                             ory (teaKey)
-   44 000000F0         
-   45 000000F0 F8DF 804C       LDR              R8, =teaData ;Initialize string
+   44 000000F4         
+   45 000000F4 F8DF 8044       LDR              R8, =teaData ;Initialize string
                                                              destination locati
                                                             on
-   46 000000F4 F8DF 904C       LDR              R9, =teaString ;Initialize stri
+   46 000000F8 F8DF 9044       LDR              R9, =teaString ;Initialize stri
                                                             ng source location
-   47 000000F8 F04F 0200       MOV              R2, #0      ;Initialize string-
+   47 000000FC F04F 0200       MOV              R2, #0      ;Initialize string-
                                                             copy counter
-   48 000000FC F04F 0A08       MOV              R10, #8
-   49 00000100         
-   50 00000100 F919 3B01 
+   48 00000100 F04F 0A08       MOV              R10, #8
+   49 00000104         
+   50 00000104 F919 3B01 
                        stringCopyLoop
                                LDRSB            R3, [R9], #1 ;Copy teaString to
                                                              teaKey
-   51 00000104 F848 3B01       STR              R3, [R8], #1
-   52 00000108 F102 0201       ADD              R2, R2, #1
-   53 0000010C 2A08            CMP              R2, #8
-   54 0000010E BF04 2200       MOVEQ            R2, #0
-   55 00000112 F10A 0A08       ADDEQ            R10, #8     ;Store LENGTH (roun
+   51 00000108 F848 3B01       STR              R3, [R8], #1
+   52 0000010C F102 0201       ADD              R2, R2, #1
+   53 00000110 2A08            CMP              R2, #8
+   54 00000112 BF04 2200       MOVEQ            R2, #0
+   55 00000116 F10A 0A08       ADDEQ            R10, #8     ;Store LENGTH (roun
                                                             ded up to nearest 8
                                                              bytes)
-   56 00000116 2B00            CMP              R3, #0
-   57 00000118 D1F2            BNE              stringCopyLoop
-   58 0000011A         
-   59 0000011A 4806    donePadding
+   56 0000011A 2B00            CMP              R3, #0
+   57 0000011C D1F2            BNE              stringCopyLoop
+   58 0000011E         
+   59 0000011E 4806    donePadding
                                LDR              R0, =teaKey ;Set Encrypt parame
                                                             ter registers
-   60 0000011C 4908            LDR              R1, =teaData
-   61 0000011E 4652            MOV              R2, R10
-   62 00000120         
-   63 00000120 F7FF FFFE       BL               ASM_TEA_ENCRYPT_STRING 
+   60 00000120 4906            LDR              R1, =teaData
+   61 00000122 4652            MOV              R2, R10
+   62 00000124         
+   63 00000124 F7FF FFFE       BL               ASM_TEA_ENCRYPT_STRING 
                                                             ;Encrypt string
-   64 00000124         
-   65 00000124 4601            MOV              R1, R0      ;Set Decrypt parame
+   64 00000128         
+   65 00000128 4601            MOV              R1, R0      ;Set Decrypt parame
                                                             ter registers
-   66 00000126 4803            LDR              R0, =teaKey
-   67 00000128 4652            MOV              R2, R10
-   68 0000012A         
-   69 0000012A F7FF FFFE       BL               ASM_TEA_DECRYPT_STRING 
+   66 0000012A 4803            LDR              R0, =teaKey
+   67 0000012C 4652            MOV              R2, R10
+   68 0000012E         
+   69 0000012E F7FF FFFE       BL               ASM_TEA_DECRYPT_STRING 
                                                             ;Decrypt string
-   70 0000012E         
-   71 0000012E E8BD 5FF0       POP              {R4-R12, LR} ;Restore previous 
+   70 00000132         
+   71 00000132 E8BD 5FF0       POP              {R4-R12, LR} ;Restore previous 
                                                             register states
-   72 00000132 4770            BX               LR          ;Return
-   73 00000134                 ALIGN
-   74 00000134         
-   75 00000134                 END
+   72 00000136 4770            BX               LR          ;Return
+   73 00000138                 ALIGN
+   74 00000138         
+   75 00000138                 END
               00000000 
-              45C5C07A 
-              40097CCE 
               00000000 
               00000000 
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\asm
+_wrapper.d -o.\asm_wrapper.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include
+ -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --predefine="__MICR
 
 
 
 ARM Macro Assembler    Page 4 
 
 
-_wrapper.d -o.\asm_wrapper.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include
- -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --predefine="__MICR
 OLIB SETA 1" --list=.\asm_wrapper.lst ASM_WRAPPER.s
 
 
@@ -224,7 +222,7 @@ Symbol: ASM_WRAPPER
    Uses
       None
 Comment: ASM_WRAPPER unused
-donePadding 0000011A
+donePadding 0000011E
 
 Symbol: donePadding
    Definitions
@@ -232,7 +230,7 @@ Symbol: donePadding
    Uses
       None
 Comment: donePadding unused
-stringCopyLoop 00000100
+stringCopyLoop 00000104
 
 Symbol: stringCopyLoop
    Definitions

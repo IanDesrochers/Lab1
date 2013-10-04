@@ -481,7 +481,7 @@ ARM Macro Assembler    Page 8
   179 00000000                 IMPORT           ASM_MAIN
   180 00000000                 IMPORT           __main
   181 00000000         
-  182 00000000 4805            LDR              R0, =__main
+  182 00000000 4805            LDR              R0, =ASM_MAIN
   183 00000002 4780            BLX              R0
   184 00000004                 ENDP
   185 00000004         
@@ -1938,15 +1938,15 @@ Symbol: ASM_MAIN
    Definitions
       At line 179 in file startup_stm32f40xx.s
    Uses
-      None
-Comment: ASM_MAIN unused
+      At line 182 in file startup_stm32f40xx.s
+Comment: ASM_MAIN used once
 __main 00000000
 
 Symbol: __main
    Definitions
       At line 180 in file startup_stm32f40xx.s
    Uses
-      At line 182 in file startup_stm32f40xx.s
-Comment: __main used once
+      None
+Comment: __main unused
 2 symbols
 444 symbols in table

@@ -4,16 +4,16 @@ ARM Linker, 5.03 [Build 76] [MDK-ARM Lite]
 
 Section Cross References
 
-    startup_stm32f40xx.o(STACK) refers (Special) to asm_wrapper.o(ASM_WRAPPER) for ASM_MAIN
-    startup_stm32f40xx.o(HEAP) refers (Special) to asm_wrapper.o(ASM_WRAPPER) for ASM_MAIN
-    startup_stm32f40xx.o(RESET) refers (Special) to asm_wrapper.o(ASM_WRAPPER) for ASM_MAIN
+    startup_stm32f40xx.o(STACK) refers (Special) to entry.o(.ARM.Collect$$$$00000000) for __main
+    startup_stm32f40xx.o(HEAP) refers (Special) to entry.o(.ARM.Collect$$$$00000000) for __main
+    startup_stm32f40xx.o(RESET) refers (Special) to entry.o(.ARM.Collect$$$$00000000) for __main
     startup_stm32f40xx.o(RESET) refers to startup_stm32f40xx.o(STACK) for __initial_sp
     startup_stm32f40xx.o(RESET) refers to startup_stm32f40xx.o(.text) for Reset_Handler
-    startup_stm32f40xx.o(.text) refers (Special) to asm_wrapper.o(ASM_WRAPPER) for ASM_MAIN
-    startup_stm32f40xx.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    startup_stm32f40xx.o(.text) refers (Special) to entry.o(.ARM.Collect$$$$00000000) for __main
+    startup_stm32f40xx.o(.text) refers to asm_wrapper.o(ASM_WRAPPER) for ASM_MAIN
     c_wrapper.o(.text) refers to memcpya.o(.text) for __aeabi_memcpy4
     c_wrapper.o(.text) refers to strncpy.o(.text) for strncpy
-    c_wrapper.o(.text) refers to asm_tea.o(ASM_TEA) for ASM_TEA_ENCRYPT_STRING
+    c_wrapper.o(.text) refers to c_tea.o(.text) for c_tea_decrypt_string
     c_wrapper.o(.text) refers to c_wrapper.o(.constdata) for .constdata
     asm_wrapper.o(ASM_WRAPPER) refers to asm_tea.o(ASM_TEA) for ASM_TEA_ENCRYPT_STRING
     asm_wrapper.o(ASM_WRAPPER) refers to data_segment.o(ASM_TEA_DATA) for teaKey
@@ -39,9 +39,8 @@ Section Cross References
 Removing Unused input sections from the image.
 
     Removing startup_stm32f40xx.o(HEAP), (512 bytes).
-    Removing c_tea.o(.text), (240 bytes).
 
-2 unused section(s) (total 752 bytes) removed from the image.
+1 unused section(s) (total 512 bytes) removed from the image.
 
 ==============================================================================
 
@@ -52,9 +51,6 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     ../clib/../cmprslib/zerorunl.c           0x00000000   Number         0  __dczerorl.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
@@ -63,10 +59,13 @@ Image Symbol Table
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/strncpy.c        0x00000000   Number         0  strncpy.o ABSOLUTE
     ASM_TEA.s                                0x00000000   Number         0  asm_tea.o ABSOLUTE
     ASM_WRAPPER.s                            0x00000000   Number         0  asm_wrapper.o ABSOLUTE
@@ -90,20 +89,21 @@ Image Symbol Table
     __lit__00000000                          0x08000198   Data           4  entry2.o(.ARM.Collect$$$$00002712)
     .text                                    0x0800019c   Section       28  startup_stm32f40xx.o(.text)
     $v0                                      0x0800019c   Number         0  startup_stm32f40xx.o(.text)
-    .text                                    0x080001b8   Section        0  c_wrapper.o(.text)
-    .text                                    0x08000204   Section        0  memcpya.o(.text)
-    .text                                    0x08000228   Section        0  strncpy.o(.text)
-    .text                                    0x08000240   Section       36  init.o(.text)
-    .text                                    0x08000264   Section        0  __dczerorl.o(.text)
-    ASM_TEA                                  0x080002a0   Section      284  asm_tea.o(ASM_TEA)
-    $v0                                      0x080002a0   Number         0  asm_tea.o(ASM_TEA)
-    ASM_WRAPPER                              0x080003bc   Section      328  asm_wrapper.o(ASM_WRAPPER)
-    teaString                                0x080003bc   Data         218  asm_wrapper.o(ASM_WRAPPER)
-    $v0                                      0x08000496   Number         0  asm_wrapper.o(ASM_WRAPPER)
-    i.__scatterload_copy                     0x08000504   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x08000512   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x08000514   Section       14  handlers.o(i.__scatterload_zeroinit)
-    .constdata                               0x08000524   Section      242  c_wrapper.o(.constdata)
+    .text                                    0x080001b8   Section        0  c_tea.o(.text)
+    .text                                    0x080002a8   Section        0  c_wrapper.o(.text)
+    .text                                    0x08000310   Section        0  memcpya.o(.text)
+    .text                                    0x08000334   Section        0  strncpy.o(.text)
+    .text                                    0x0800034c   Section       36  init.o(.text)
+    .text                                    0x08000370   Section        0  __dczerorl.o(.text)
+    ASM_TEA                                  0x080003ac   Section      284  asm_tea.o(ASM_TEA)
+    $v0                                      0x080003ac   Number         0  asm_tea.o(ASM_TEA)
+    ASM_WRAPPER                              0x080004c8   Section      324  asm_wrapper.o(ASM_WRAPPER)
+    teaString                                0x080004c8   Data         218  asm_wrapper.o(ASM_WRAPPER)
+    $v0                                      0x080005a2   Number         0  asm_wrapper.o(ASM_WRAPPER)
+    i.__scatterload_copy                     0x0800060c   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0800061a   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0800061c   Section       14  handlers.o(i.__scatterload_zeroinit)
+    .constdata                               0x0800062c   Section      338  c_wrapper.o(.constdata)
     ASM_TEA_DATA                             0x20000000   Section     1040  data_segment.o(ASM_TEA_DATA)
     STACK                                    0x20000410   Section     1024  startup_stm32f40xx.o(STACK)
 
@@ -221,25 +221,29 @@ Image Symbol Table
     USART3_IRQHandler                        0x080001b3   Thumb Code     0  startup_stm32f40xx.o(.text)
     USART6_IRQHandler                        0x080001b3   Thumb Code     0  startup_stm32f40xx.o(.text)
     WWDG_IRQHandler                          0x080001b3   Thumb Code     0  startup_stm32f40xx.o(.text)
-    main                                     0x080001b9   Thumb Code    72  c_wrapper.o(.text)
-    __aeabi_memcpy                           0x08000205   Thumb Code    36  memcpya.o(.text)
-    __aeabi_memcpy4                          0x08000205   Thumb Code     0  memcpya.o(.text)
-    __aeabi_memcpy8                          0x08000205   Thumb Code     0  memcpya.o(.text)
-    strncpy                                  0x08000229   Thumb Code    24  strncpy.o(.text)
-    __scatterload                            0x08000241   Thumb Code    28  init.o(.text)
-    __scatterload_rt2                        0x08000241   Thumb Code     0  init.o(.text)
-    __decompress                             0x08000265   Thumb Code     0  __dczerorl.o(.text)
-    __decompress0                            0x08000265   Thumb Code    58  __dczerorl.o(.text)
-    ASM_TEA_ENCRYPT                          0x080002a1   Thumb Code     4  asm_tea.o(ASM_TEA)
-    ASM_TEA_DECRYPT                          0x080002f9   Thumb Code     4  asm_tea.o(ASM_TEA)
-    ASM_TEA_ENCRYPT_STRING                   0x08000355   Thumb Code     4  asm_tea.o(ASM_TEA)
-    ASM_TEA_DECRYPT_STRING                   0x08000385   Thumb Code     4  asm_tea.o(ASM_TEA)
-    ASM_MAIN                                 0x08000497   Thumb Code     4  asm_wrapper.o(ASM_WRAPPER)
-    __scatterload_copy                       0x08000505   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x08000513   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x08000515   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    Region$$Table$$Base                      0x08000618   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000638   Number         0  anon$$obj.o(Region$$Table)
+    c_tea_encrypt                            0x080001b9   Thumb Code    76  c_tea.o(.text)
+    c_tea_decrypt                            0x08000205   Thumb Code    76  c_tea.o(.text)
+    c_tea_encrypt_string                     0x08000251   Thumb Code    40  c_tea.o(.text)
+    c_tea_decrypt_string                     0x08000279   Thumb Code    40  c_tea.o(.text)
+    main                                     0x080002a9   Thumb Code   100  c_wrapper.o(.text)
+    __aeabi_memcpy                           0x08000311   Thumb Code    36  memcpya.o(.text)
+    __aeabi_memcpy4                          0x08000311   Thumb Code     0  memcpya.o(.text)
+    __aeabi_memcpy8                          0x08000311   Thumb Code     0  memcpya.o(.text)
+    strncpy                                  0x08000335   Thumb Code    24  strncpy.o(.text)
+    __scatterload                            0x0800034d   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x0800034d   Thumb Code     0  init.o(.text)
+    __decompress                             0x08000371   Thumb Code     0  __dczerorl.o(.text)
+    __decompress0                            0x08000371   Thumb Code    58  __dczerorl.o(.text)
+    ASM_TEA_ENCRYPT                          0x080003ad   Thumb Code     4  asm_tea.o(ASM_TEA)
+    ASM_TEA_DECRYPT                          0x08000405   Thumb Code     4  asm_tea.o(ASM_TEA)
+    ASM_TEA_ENCRYPT_STRING                   0x08000461   Thumb Code     4  asm_tea.o(ASM_TEA)
+    ASM_TEA_DECRYPT_STRING                   0x08000491   Thumb Code     4  asm_tea.o(ASM_TEA)
+    ASM_MAIN                                 0x080005a3   Thumb Code     4  asm_wrapper.o(ASM_WRAPPER)
+    __scatterload_copy                       0x0800060d   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0800061b   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0800061d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    Region$$Table$$Base                      0x08000780   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080007a0   Number         0  anon$$obj.o(Region$$Table)
     teaData                                  0x20000000   Data        1024  data_segment.o(ASM_TEA_DATA)
     teaKey                                   0x20000400   Data          16  data_segment.o(ASM_TEA_DATA)
     __initial_sp                             0x20000810   Data           0  startup_stm32f40xx.o(STACK)
@@ -252,9 +256,9 @@ Memory Map of the image
 
   Image Entry point : 0x0800019d
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00000a48, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x00000644])
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00000bb0, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000007ac])
 
-    Execution Region ER_RO (Base: 0x08000000, Size: 0x00000638, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x08000000, Size: 0x000007a0, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -269,21 +273,22 @@ Memory Map of the image
     0x08000198   0x00000000   Code   RO           66    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
     0x08000198   0x00000004   Code   RO           55    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x0800019c   0x0000001c   Code   RO            4  * .text               startup_stm32f40xx.o
-    0x080001b8   0x0000004c   Code   RO           22    .text               c_wrapper.o
-    0x08000204   0x00000024   Code   RO           48    .text               mc_w.l(memcpya.o)
-    0x08000228   0x00000018   Code   RO           50    .text               mc_w.l(strncpy.o)
-    0x08000240   0x00000024   Code   RO           68    .text               mc_w.l(init.o)
-    0x08000264   0x0000003a   Code   RO           78    .text               mc_w.l(__dczerorl.o)
-    0x0800029e   0x00000002   PAD
-    0x080002a0   0x0000011c   Code   RO           38    ASM_TEA             asm_tea.o
-    0x080003bc   0x00000148   Code   RO           41    ASM_WRAPPER         asm_wrapper.o
-    0x08000504   0x0000000e   Code   RO           72    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08000512   0x00000002   Code   RO           73    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08000514   0x0000000e   Code   RO           74    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x08000522   0x00000002   PAD
-    0x08000524   0x000000f2   Data   RO           23    .constdata          c_wrapper.o
-    0x08000616   0x00000002   PAD
-    0x08000618   0x00000020   Data   RO           70    Region$$Table       anon$$obj.o
+    0x080001b8   0x000000f0   Code   RO           10    .text               c_tea.o
+    0x080002a8   0x00000068   Code   RO           22    .text               c_wrapper.o
+    0x08000310   0x00000024   Code   RO           48    .text               mc_w.l(memcpya.o)
+    0x08000334   0x00000018   Code   RO           50    .text               mc_w.l(strncpy.o)
+    0x0800034c   0x00000024   Code   RO           68    .text               mc_w.l(init.o)
+    0x08000370   0x0000003a   Code   RO           78    .text               mc_w.l(__dczerorl.o)
+    0x080003aa   0x00000002   PAD
+    0x080003ac   0x0000011c   Code   RO           38    ASM_TEA             asm_tea.o
+    0x080004c8   0x00000144   Code   RO           41    ASM_WRAPPER         asm_wrapper.o
+    0x0800060c   0x0000000e   Code   RO           72    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800061a   0x00000002   Code   RO           73    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800061c   0x0000000e   Code   RO           74    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800062a   0x00000002   PAD
+    0x0800062c   0x00000152   Data   RO           23    .constdata          c_wrapper.o
+    0x0800077e   0x00000002   PAD
+    0x08000780   0x00000020   Data   RO           70    Region$$Table       anon$$obj.o
 
 
     Execution Region ER_RW (Base: 0x20000000, Size: 0x00000410, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000000c])
@@ -307,15 +312,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       284          8          0          0          0        252   asm_tea.o
-       328        238          0          0          0        200   asm_wrapper.o
-         0          0          0          0          0       1444   c_tea.o
-        76          4        242          0          0        899   c_wrapper.o
+       284          8          0          0          0        256   asm_tea.o
+       324        230          0          0          0        204   asm_wrapper.o
+       240          8          0          0          0       3060   c_tea.o
+       104          4        338          0          0       1023   c_wrapper.o
          0          0          0       1040          0          0   data_segment.o
-        28          4        392          0       1024        784   startup_stm32f40xx.o
+        28          4        392          0       1024        788   startup_stm32f40xx.o
 
     ----------------------------------------------------------------------
-       716        254        668       1040       1024       3579   Object Totals
+       980        254        764       1040       1024       5331   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          2          0          0          0   (incl. Padding)
 
@@ -357,15 +362,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-       924        270        668       1040       1024       3739   Grand Totals
-       924        270        668         12       1024       3739   ELF Image Totals (compressed)
-       924        270        668         12          0          0   ROM Totals
+      1188        270        764       1040       1024       5491   Grand Totals
+      1188        270        764         12       1024       5491   ELF Image Totals (compressed)
+      1188        270        764         12          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1592 (   1.55kB)
+    Total RO  Size (Code + RO Data)                 1952 (   1.91kB)
     Total RW  Size (RW Data + ZI Data)              2064 (   2.02kB)
-    Total ROM Size (Code + RO Data + RW Data)       1604 (   1.57kB)
+    Total ROM Size (Code + RO Data + RW Data)       1964 (   1.92kB)
 
 ==============================================================================
 

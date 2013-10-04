@@ -35,10 +35,10 @@ ASM_MAIN		PUSH {R4-R12, LR}				;Store previous register states
 				
 				LDR R0, =teaKey					;Load &KEY into parameter register
 
-				LDR R4, =0x45C5C07A				;Generate KEY
-				LDR R5, =0x40097CCE
-				LDR R6, =0x66
-				LDR R7, =0x68
+				LDR R4, =0x2				;Generate KEY
+				LDR R5, =0x0
+				LDR R6, =0x1
+				LDR R7, =0x3
 				
 				STM R0, {R4-R7}					;Store KEY into memory (teaKey)
 				

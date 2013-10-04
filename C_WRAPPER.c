@@ -18,10 +18,14 @@ extern char *ASM_TEA_DECRYPT_STRING(uint32_t *, char *, uint32_t);
 
 int main() {
 	
-	uint32_t key[] = {0x45C5C07A, 0x40097CCE, 0x66, 0x68};
-	uint32_t testData[] = {0x1234567, 0x89ABCDEF};
-	//uint32_t Secret_Quote_Group_6[] = {0x7b6b37f9, 0xd10dc726, 0x40b55bb, 0x3a310b8e, 0x342c7c41, 0xf62fb160, 0xe3e55443, 0x656ce142, 0xba6bd276, 0xaaf3c532, 0x62f0ece4, 0x71c7d3eb, 0x3ed16f88, 0x9f4b9c9d, 0xb4dbb0fd, 0x285eedfc, 0x5f961f5b, 0x4e26ad65, 0xfdcfa429, 0x765cd73f, 0x502993b, 0xc080025f, 0x1b1a05c4, 0x3224c163, 0x32325d1b, 0x51f354ce};
+	uint32_t i,j;
+	//uint32_t key[] = {0x45C5C07A, 0x40097CCE, 0x66, 0x68};
+	uint32_t key[] = {0x3, 0x5, 0x9, 0x4};
+	//uint32_t testData[] = {0x1234567, 0x89ABCDEF};
+	uint32_t Secret_Quote_Group_6[] = {0x7b6b37f9, 0xd10dc726, 0x40b55bb, 0x3a310b8e, 0x342c7c41, 0xf62fb160, 0xe3e55443, 0x656ce142, 0xba6bd276, 0xaaf3c532, 0x62f0ece4, 0x71c7d3eb, 0x3ed16f88, 0x9f4b9c9d, 0xb4dbb0fd, 0x285eedfc, 0x5f961f5b, 0x4e26ad65, 0xfdcfa429, 0x765cd73f, 0x502993b, 0xc080025f, 0x1b1a05c4, 0x3224c163, 0x32325d1b, 0x51f354ce};
+	uint32_t encryptedString[104];
 	char value[] = "Space: the final frontier. These are the voyages of the starship Enterprise. Its continuing mission to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before.";
+	//char *decryptedValue;
 	
 	//Add necessary whitespace to end of string to be 64b-aligned
 	char paddedValue[(((sizeof(value)-1)/sizeof(char))/8)*8+8];
@@ -36,12 +40,22 @@ int main() {
 	//c_tea_decrypt(key, testData);
 	
 	//Test string encryption (assembly)
-	ASM_TEA_ENCRYPT_STRING(key, paddedValue, sizeof(paddedValue)/sizeof(char));
-	ASM_TEA_DECRYPT_STRING(key, paddedValue, sizeof(paddedValue)/sizeof(char));
+	//ASM_TEA_ENCRYPT_STRING(key, paddedValue, sizeof(paddedValue)/sizeof(char));
+	//ASM_TEA_DECRYPT_STRING(key, paddedValue, sizeof(paddedValue)/sizeof(char));
 	
 	//Test string encryption (c)
 	//c_tea_encrypt_string(key, paddedValue, sizeof(paddedValue)/sizeof(char));
 	//c_tea_decrypt_string(key, paddedValue, sizeof(paddedValue)/sizeof(char));
+	
+	//Decrypt encrypted string
+	for (i=0x64; i<=0x68; i++) {
+		for (j=0x64; j<=0x68; j++) {
+			key[2] = i;
+			key[3] = j;
+			memcpy(encryptedString, Secret_Quote_Group_6, 104);
+			c_tea_decrypt_string(key, (char *)encryptedString, 104);
+		}
+	}
 
 	return 0;
 }

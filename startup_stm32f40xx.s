@@ -179,7 +179,7 @@ Reset_Handler    PROC
         IMPORT  ASM_MAIN
         IMPORT  __main
 
-                 LDR R0, =__main
+                 LDR R0, =ASM_MAIN
 				 BLX R0
                  ENDP
 
