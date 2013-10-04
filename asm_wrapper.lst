@@ -200,8 +200,8 @@ ARM Macro Assembler    Page 4
 
 
 _wrapper.d -o.\asm_wrapper.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include
- -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --list=.\asm_wrappe
-r.lst ASM_WRAPPER.s
+ -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --predefine="__MICR
+OLIB SETA 1" --list=.\asm_wrapper.lst ASM_WRAPPER.s
 
 
 
@@ -307,4 +307,4 @@ Symbol: teaKey
       At line 66 in file ASM_WRAPPER.s
 
 6 symbols
-345 symbols in table
+346 symbols in table

@@ -302,8 +302,8 @@ ARM Macro Assembler    Page 5
               C6EF3720 
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\asm
 _tea.d -o.\asm_tea.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Ke
-il\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --list=.\asm_tea.lst ASM_TE
-A.s
+il\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --predefine="__MICROLIB SET
+A 1" --list=.\asm_tea.lst ASM_TEA.s
 
 
 
@@ -391,4 +391,4 @@ Symbol: ENCRYPT_ITERATE
       At line 166 in file ASM_TEA.s
 Comment: ENCRYPT_ITERATE used once
 9 symbols
-343 symbols in table
+344 symbols in table

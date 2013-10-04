@@ -1,11 +1,8 @@
 Dependencies for Project 'Lab 1', Target 'Lab 1': (DO NOT MODIFY !)
-F (.\startup_stm32f40xx.s)(0x524E3B01)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\startup_stm32f40xx.lst --xref -o .\startup_stm32f40xx.o --depend .\startup_stm32f40xx.d)
-F (.\C_TEA.c)(0x524E2AF5)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DSTM32F40XX-o .\c_tea.o --omf_browse .\c_tea.crf --depend .\c_tea.d)
+F (.\startup_stm32f40xx.s)(0x524ECE70)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\startup_stm32f40xx.lst --xref -o .\startup_stm32f40xx.o --depend .\startup_stm32f40xx.d)
+F (.\C_TEA.c)(0x524ECD01)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DSTM32F40XX-o .\c_tea.o --omf_browse .\c_tea.crf --depend .\c_tea.d)
+F (.\C_WRAPPER.c)(0x524ECE40)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DSTM32F40XX-o .\c_wrapper.o --omf_browse .\c_wrapper.crf --depend .\c_wrapper.d)
 I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C86004)
-I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x51C86004)
-F (.\C_WRAPPER.c)(0x524E3989)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DSTM32F40XX-o .\c_wrapper.o --omf_browse .\c_wrapper.crf --depend .\c_wrapper.d)
-I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C86004)
-I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C86004)
-F (.\ASM_TEA.s)(0x524DF4FB)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\asm_tea.lst --xref -o .\asm_tea.o --depend .\asm_tea.d)
-F (.\ASM_WRAPPER.s)(0x524E3D33)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\asm_wrapper.lst --xref -o .\asm_wrapper.o --depend .\asm_wrapper.d)
-F (.\DATA_SEGMENT.s)(0x524DF3BC)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\data_segment.lst --xref -o .\data_segment.o --depend .\data_segment.d)
+F (.\ASM_TEA.s)(0x524EC95E)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\asm_tea.lst --xref -o .\asm_tea.o --depend .\asm_tea.d)
+F (.\ASM_WRAPPER.s)(0x524EC95E)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\asm_wrapper.lst --xref -o .\asm_wrapper.o --depend .\asm_wrapper.d)
+F (.\DATA_SEGMENT.s)(0x524EC95E)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx--list .\data_segment.lst --xref -o .\data_segment.o --depend .\data_segment.d)

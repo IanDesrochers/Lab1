@@ -399,8 +399,8 @@ ARM Macro Assembler    Page 7
    11 00000410                 END
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\dat
 a_segment.d -o.\data_segment.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Inclu
-de -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --list=.\data_seg
-ment.lst DATA_SEGMENT.s
+de -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --predefine="__MI
+CROLIB SETA 1" --list=.\data_segment.lst DATA_SEGMENT.s
 
 
 
@@ -432,4 +432,4 @@ Symbol: teaKey
       At line 6 in file DATA_SEGMENT.s
 Comment: teaKey used once
 3 symbols
-334 symbols in table
+335 symbols in table

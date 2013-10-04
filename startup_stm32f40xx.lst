@@ -479,9 +479,9 @@ ARM Macro Assembler    Page 8
   178 00000000                 EXPORT           Reset_Handler             [WEAK
 ]
   179 00000000                 IMPORT           ASM_MAIN
-  180 00000000                 IMPORT           main
+  180 00000000                 IMPORT           __main
   181 00000000         
-  182 00000000 4808            LDR              R0, =ASM_MAIN
+  182 00000000 4805            LDR              R0, =__main
   183 00000002 4780            BLX              R0
   184 00000004                 ENDP
   185 00000004         
@@ -836,38 +836,26 @@ ARM Macro Assembler    Page 13
   406 00000018         ;*******************************************************
                        ************************
   407 00000018                 IF               :DEF:__MICROLIB
-  414 00000018         
-  415 00000018                 IMPORT           __use_two_region_memory
-  416 00000018                 EXPORT           __user_initial_stackheap
-  417 00000018         
-  418 00000018         __user_initial_stackheap
-  419 00000018         
-  420 00000018 4803            LDR              R0, =  Heap_Mem
+  408 00000018         
+  409 00000018                 EXPORT           __initial_sp
+  410 00000018                 EXPORT           __heap_base
+  411 00000018                 EXPORT           __heap_limit
+  412 00000018         
+  413 00000018                 ELSE
+  428                          ENDIF
 
 
 
 ARM Macro Assembler    Page 14 
 
 
-  421 0000001A 4904            LDR              R1, =(Stack_Mem + Stack_Size)
-  422 0000001C 4A04            LDR              R2, = (Heap_Mem +  Heap_Size)
-  423 0000001E 4B05            LDR              R3, = Stack_Mem
-  424 00000020 4770            BX               LR
-  425 00000022         
-  426 00000022 00 00           ALIGN
-  427 00000024         
-  428 00000024                 ENDIF
-  429 00000024         
-  430 00000024                 END
-              00000000 
-              00000000 
-              00000400 
-              00000200 
+  429 00000018         
+  430 00000018                 END
               00000000 
 Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=.\sta
 rtup_stm32f40xx.d -o.\startup_stm32f40xx.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM
-\CMSIS\Include -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --lis
-t=.\startup_stm32f40xx.lst startup_stm32f40xx.s
+\CMSIS\Include -IC:\Keil\ARM\Inc\ST\STM32F4xx --predefine="__EVAL SETA 1" --pre
+define="__MICROLIB SETA 1" --list=.\startup_stm32f40xx.lst startup_stm32f40xx.s
 
 
 
@@ -888,9 +876,8 @@ Symbol: Stack_Mem
    Definitions
       At line 44 in file startup_stm32f40xx.s
    Uses
-      At line 421 in file startup_stm32f40xx.s
-      At line 423 in file startup_stm32f40xx.s
-
+      None
+Comment: Stack_Mem unused
 __initial_sp 00000400
 
 Symbol: __initial_sp
@@ -898,7 +885,8 @@ Symbol: __initial_sp
       At line 45 in file startup_stm32f40xx.s
    Uses
       At line 69 in file startup_stm32f40xx.s
-Comment: __initial_sp used once
+      At line 409 in file startup_stm32f40xx.s
+
 3 symbols
 
 
@@ -920,25 +908,24 @@ Symbol: Heap_Mem
    Definitions
       At line 56 in file startup_stm32f40xx.s
    Uses
-      At line 420 in file startup_stm32f40xx.s
-      At line 422 in file startup_stm32f40xx.s
-
+      None
+Comment: Heap_Mem unused
 __heap_base 00000000
 
 Symbol: __heap_base
    Definitions
       At line 55 in file startup_stm32f40xx.s
    Uses
-      None
-Comment: __heap_base unused
+      At line 410 in file startup_stm32f40xx.s
+Comment: __heap_base used once
 __heap_limit 00000200
 
 Symbol: __heap_limit
    Definitions
       At line 57 in file startup_stm32f40xx.s
    Uses
-      None
-Comment: __heap_limit unused
+      At line 411 in file startup_stm32f40xx.s
+Comment: __heap_limit used once
 4 symbols
 
 
@@ -1907,15 +1894,7 @@ Symbol: WWDG_IRQHandler
       At line 87 in file startup_stm32f40xx.s
       At line 232 in file startup_stm32f40xx.s
 
-__user_initial_stackheap 00000018
-
-Symbol: __user_initial_stackheap
-   Definitions
-      At line 418 in file startup_stm32f40xx.s
-   Uses
-      At line 416 in file startup_stm32f40xx.s
-Comment: __user_initial_stackheap used once
-95 symbols
+94 symbols
 
 
 
@@ -1929,8 +1908,7 @@ Symbol: Heap_Size
       At line 52 in file startup_stm32f40xx.s
    Uses
       At line 56 in file startup_stm32f40xx.s
-      At line 422 in file startup_stm32f40xx.s
-
+Comment: Heap_Size used once
 Stack_Size 00000400
 
 Symbol: Stack_Size
@@ -1938,8 +1916,7 @@ Symbol: Stack_Size
       At line 41 in file startup_stm32f40xx.s
    Uses
       At line 44 in file startup_stm32f40xx.s
-      At line 421 in file startup_stm32f40xx.s
-
+Comment: Stack_Size used once
 __Vectors_Size 00000188
 
 Symbol: __Vectors_Size
@@ -1961,23 +1938,15 @@ Symbol: ASM_MAIN
    Definitions
       At line 179 in file startup_stm32f40xx.s
    Uses
-      At line 182 in file startup_stm32f40xx.s
-Comment: ASM_MAIN used once
-__use_two_region_memory 00000000
-
-Symbol: __use_two_region_memory
-   Definitions
-      At line 415 in file startup_stm32f40xx.s
-   Uses
       None
-Comment: __use_two_region_memory unused
-main 00000000
+Comment: ASM_MAIN unused
+__main 00000000
 
-Symbol: main
+Symbol: __main
    Definitions
       At line 180 in file startup_stm32f40xx.s
    Uses
-      None
-Comment: main unused
-3 symbols
-447 symbols in table
+      At line 182 in file startup_stm32f40xx.s
+Comment: __main used once
+2 symbols
+444 symbols in table

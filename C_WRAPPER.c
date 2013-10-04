@@ -1,6 +1,6 @@
 //Main c program
 
-#include <stdio.h>
+//#include <stdio.h>
 #include <string.h>
 
 typedef unsigned long uint32_t;
@@ -28,16 +28,16 @@ int main() {
 	strncpy(paddedValue, value, sizeof(value));
 	
 	//Test execution time on a single 64b segment (assembly)
-	ASM_TEA_ENCRYPT(key, testData);
-	ASM_TEA_DECRYPT(key, testData);
+	//ASM_TEA_ENCRYPT(key, testData);
+	//ASM_TEA_DECRYPT(key, testData);
 	
 	//Test execution time on a single 64b segment (c)
 	//c_tea_encrypt(key, testData);
 	//c_tea_decrypt(key, testData);
 	
 	//Test string encryption (assembly)
-	//encryptedValue = ASM_TEA_ENCRYPT_STRING(key, paddedValue, sizeof(paddedValue)/sizeof(char));
-	//ASM_TEA_DECRYPT_STRING(key, encryptedValue, sizeof(paddedValue)/sizeof(char));
+	ASM_TEA_ENCRYPT_STRING(key, paddedValue, sizeof(paddedValue)/sizeof(char));
+	ASM_TEA_DECRYPT_STRING(key, paddedValue, sizeof(paddedValue)/sizeof(char));
 	
 	//Test string encryption (c)
 	//c_tea_encrypt_string(key, paddedValue, sizeof(paddedValue)/sizeof(char));

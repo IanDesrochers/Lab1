@@ -177,9 +177,9 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]
         IMPORT  ASM_MAIN
-        IMPORT  main
+        IMPORT  __main
 
-                 LDR R0, =ASM_MAIN
+                 LDR R0, =__main
 				 BLX R0
                  ENDP
 
@@ -412,7 +412,7 @@ FPU_IRQHandler
                 
                  ELSE
                 
-                 IMPORT  __use_two_region_memory
+                 ;IMPORT  __use_two_region_memory
                  EXPORT  __user_initial_stackheap
                  
 __user_initial_stackheap
